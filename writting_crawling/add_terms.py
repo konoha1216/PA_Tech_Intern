@@ -110,6 +110,10 @@ def count_entitiesNumber(test_compo):
     return 0
 count_entitiesNumber(test_compo)
 
+# check if one compo has '' in its related entities
+for zuowen in test_compo:
+    if '' in zuowen['entities']:
+        print(zuowen)
 
 def frequency_sort(path, test_compo):
     df2 = pd.read_excel(path)
@@ -167,9 +171,10 @@ def lastprocess(compo_dict, test_compo, which, valid_ratio=0.1, iftest = False, 
         if zuowen['terms']==[]:
             zuowen['terms'].append('无主题')
 
-    valid = random.sample(compo_dict,len(compo_dict)*valid_ratio)
-    if iftest==True:
-        test = random.sample(compo_dict,len(compo_dict)*test_ratio)
+    valid = random.sample(compo_dict,int(np.floor(len(compo_dict)*valid_ratio)))
+    test = []
+    if iftest:
+        test = random.sample(compo_dict,int(np.floor(len(compo_dict)*test_ratio)))
     train = [i for i in compo_dict if (i not in valid and i not in test)]
 
     with open('train.txt', 'w', encoding='utf-8') as f:

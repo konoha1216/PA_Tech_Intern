@@ -53,7 +53,7 @@ with open('bcmi_Correction.txt', 'w') as f:
         f.write('\n')
 baidu = []
 flag = 0
-num = 0
+num =0
 for text in error_list:
     jiucuo = client.ecnet(text)['item']['correct_query']
     baidu.append(jiucuo)
